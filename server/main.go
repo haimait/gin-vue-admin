@@ -10,7 +10,7 @@ import (
 // @title Swagger Example API
 // @version 0.0.1
 // @description This is a sample Server pets
-// @securityDefinitions.apikey ApiKeyAuth
+// @securityDefinitions.apikey ApiKey Auth
 // @in header
 // @name x-token
 // @BasePath /
