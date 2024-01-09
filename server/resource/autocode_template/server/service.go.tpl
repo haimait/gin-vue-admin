@@ -121,7 +121,8 @@ func ({{.Abbreviation}}Service *{{.StructName}}Service)Get{{.StructName}}InfoLis
          	{{- end}}
        {{- end}}
        if orderMap[info.Sort] {
-          OrderStr = info.Sort
+          # OrderStr = info.Sort
+          OrderStr = fmt.Sprintf("`%s`", info.Sort)
           if info.Order == "descending" {
              OrderStr = OrderStr + " desc"
           }

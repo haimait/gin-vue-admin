@@ -2,7 +2,6 @@ package initialize
 
 import (
 	"fmt"
-
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/middleware"
 	"github.com/flipped-aurora/gin-vue-admin/server/plugin/email"
@@ -33,4 +32,7 @@ func InstallPlugin(Router *gin.Engine) {
 		global.GVA_CONFIG.Email.Port,
 		global.GVA_CONFIG.Email.IsSSL,
 	))
+
+	// 888 为普通用户ID
+	//PluginInit(PublicGroup, register.CreateRegisterPlug("888"))
 }
