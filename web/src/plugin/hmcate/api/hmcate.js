@@ -7,10 +7,10 @@ import service from '@/utils/request'
 // @Produce application/json
 // @Param data body model.HmCategory true "创建分类管理"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"创建成功"}"
-// @Router /Category/createHmCategory [post]
+// @Router /category/createHmCategory [post]
 export const createHmCategory = (data) => {
   return service({
-    url: '/Category/createHmCategory',
+    url: '/category/createHmCategory',
     method: 'post',
     data
   })
@@ -23,10 +23,10 @@ export const createHmCategory = (data) => {
 // @Produce application/json
 // @Param data body model.HmCategory true "删除分类管理"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
-// @Router /Category/deleteHmCategory [delete]
+// @Router /category/deleteHmCategory [delete]
 export const deleteHmCategory = (params) => {
   return service({
-    url: '/Category/deleteHmCategory',
+    url: '/category/deleteHmCategory',
     method: 'delete',
     params
   })
@@ -39,10 +39,10 @@ export const deleteHmCategory = (params) => {
 // @Produce application/json
 // @Param data body request.IdsReq true "批量删除分类管理"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
-// @Router /Category/deleteHmCategory [delete]
+// @Router /category/deleteHmCategory [delete]
 export const deleteHmCategoryByIds = (params) => {
   return service({
-    url: '/Category/deleteHmCategoryByIds',
+    url: '/category/deleteHmCategoryByIds',
     method: 'delete',
     params
   })
@@ -55,10 +55,10 @@ export const deleteHmCategoryByIds = (params) => {
 // @Produce application/json
 // @Param data body model.HmCategory true "更新分类管理"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"更新成功"}"
-// @Router /Category/updateHmCategory [put]
+// @Router /category/updateHmCategory [put]
 export const updateHmCategory = (data) => {
   return service({
-    url: '/Category/updateHmCategory',
+    url: '/category/updateHmCategory',
     method: 'put',
     data
   })
@@ -71,10 +71,10 @@ export const updateHmCategory = (data) => {
 // @Produce application/json
 // @Param data query model.HmCategory true "用id查询分类管理"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"查询成功"}"
-// @Router /Category/findHmCategory [get]
+// @Router /category/findHmCategory [get]
 export const findHmCategory = (params) => {
   return service({
-    url: '/Category/findHmCategory',
+    url: '/category/findHmCategory',
     method: 'get',
     params
   })
@@ -87,10 +87,25 @@ export const findHmCategory = (params) => {
 // @Produce application/json
 // @Param data query request.PageInfo true "分页获取分类管理列表"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
-// @Router /Category/getHmCategoryList [get]
+// @Router /category/getHmCategoryList [get]
 export const getHmCategoryList = (params) => {
   return service({
-    url: '/Category/getHmCategoryList',
+    url: '/category/getHmCategoryList',
+    method: 'get',
+    params
+  })
+}
+// @Tags HmCategory
+// @Summary 分页获取分类管理列表树
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data query request.PageInfo true "分页获取分类管理列表树"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /category/getHmCategoryTree [get]
+export const getHmCategoryTree = (params) => {
+  return service({
+    url: '/category/getHmCategoryTree',
     method: 'get',
     params
   })
