@@ -7,6 +7,7 @@ var (
 	MenuMetaVerify         = Rules{"Title": {NotEmpty()}}
 	LoginVerify            = Rules{"CaptchaId": {NotEmpty()}, "Username": {NotEmpty()}, "Password": {NotEmpty()}}
 	RegisterVerify         = Rules{"Username": {NotEmpty()}, "NickName": {NotEmpty()}, "Password": {NotEmpty()}, "AuthorityId": {NotEmpty()}}
+	RegisterCasUserVerify  = Rules{"Username": {NotEmpty()}, "Phone": {RegexpMatch(mobileRegex)}, "Password": {NotEmpty()}, "RePassword": {NotEmpty()}, "Captcha": {NotEmpty()}, "CaptchaId": {NotEmpty()}}
 	PageInfoVerify         = Rules{"Type": {NotEmpty()}, "Page": {NotEmpty()}, "PageSize": {NotEmpty()}}
 	CustomerVerify         = Rules{"CustomerName": {NotEmpty()}, "CustomerPhoneData": {NotEmpty()}}
 	AutoCodeVerify         = Rules{"Abbreviation": {NotEmpty()}, "StructName": {NotEmpty()}, "PackageName": {NotEmpty()}, "Fields": {NotEmpty()}}
@@ -17,3 +18,5 @@ var (
 	ChangePasswordVerify   = Rules{"Password": {NotEmpty()}, "NewPassword": {NotEmpty()}}
 	SetUserAuthorityVerify = Rules{"AuthorityId": {NotEmpty()}}
 )
+
+var mobileRegex = `^1[3456789]\d{9}$` // [3456789] 表示第二个字符为3、4、5、6、7、8、9中的一个； \d{9} 表示接下来的9个字符均为数字
