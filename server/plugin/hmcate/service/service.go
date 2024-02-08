@@ -2,8 +2,8 @@ package service
 
 import (
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	hmCate "github.com/flipped-aurora/gin-vue-admin/server/plugin/hmCate/model"
-	hmCateReq "github.com/flipped-aurora/gin-vue-admin/server/plugin/hmCate/model/request"
+	hmCate "github.com/flipped-aurora/gin-vue-admin/server/plugin/hmcate/model"
+	hmCateReq "github.com/flipped-aurora/gin-vue-admin/server/plugin/hmcate/model/request"
 	"gorm.io/gorm"
 )
 

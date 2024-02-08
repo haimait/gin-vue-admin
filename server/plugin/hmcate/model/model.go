@@ -14,10 +14,10 @@ type HmCategory struct {
 	global.GVA_MODEL
 	Level     *int         `json:"level" form:"level" gorm:"column:level;comment:分类层级;size:1;"`                                                              //分类层级
 	ParentId  *int         `json:"parentId" form:"parentId" gorm:"column:parent_id;comment:父级id;size:20;"`                                                   //父级id
-	Name      string       `json:"name" form:"name" gorm:"column:name;comment:分类名称;size:191;" binding:"required"`                                            //分类名称
+	Name      string       `json:"name" form:"name" gorm:"column:name;comment:分类名称;size:191;"`                                                               //分类名称
 	IsShow    *bool        `json:"isShow" form:"isShow" gorm:"column:is_show;comment:是否显示 0:隐藏 1:显示;size:1;"`                                                //是否显示
 	ImgPath   string       `json:"imgPath" form:"imgPath" gorm:"column:img_path;default:https://qmplusimg.henrongyi.top/gvalogo.png;comment:图片地址;size:191;"` //图片地址
-	Type      string       `json:"type" form:"type" gorm:"column:type;type:enum('article','goods');comment:类型：article/goods;" binding:"required"`            //类型
+	Type      string       `json:"type" form:"type" gorm:"column:type;type:enum('article','goods');comment:类型：article/goods;"`                               //类型
 	Sort      *int         `json:"sort" form:"sort" gorm:"column:sort;comment:排序;size:1;"`                                                                   //排序
 	Extend    string       `json:"extend" form:"extend" gorm:"column:extend;comment:扩展字段;size:1000;"`                                                        //扩展字段
 	CreatedBy uint         `gorm:"column:created_by;comment:创建者"`

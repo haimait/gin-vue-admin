@@ -2,6 +2,7 @@ package initialize
 
 import (
 	"fmt"
+	"github.com/flipped-aurora/gin-vue-admin/server/plugin/casuser"
 	"github.com/flipped-aurora/gin-vue-admin/server/plugin/hmcate"
 
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
@@ -36,4 +37,5 @@ func InstallPlugin(Router *gin.Engine) {
 	))
 
 	PluginInit(PublicGroup, hmcate.CreateHmcatePlug())
+	PluginInit(PublicGroup, casuser.CreateCasUserPlug())
 }

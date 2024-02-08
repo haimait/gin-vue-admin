@@ -3,8 +3,8 @@ package api
 import (
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
-	hmCate "github.com/flipped-aurora/gin-vue-admin/server/plugin/hmCate/model"
-	hmCateReq "github.com/flipped-aurora/gin-vue-admin/server/plugin/hmCate/model/request"
+	hmCate "github.com/flipped-aurora/gin-vue-admin/server/plugin/hmcate/model"
+	hmCateReq "github.com/flipped-aurora/gin-vue-admin/server/plugin/hmcate/model/request"
 	"github.com/flipped-aurora/gin-vue-admin/server/plugin/hmcate/service"
 
 	"github.com/flipped-aurora/gin-vue-admin/server/utils"
