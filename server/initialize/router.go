@@ -81,7 +81,7 @@ func Routers() *gin.Engine {
 		systemRouter.InitAuthorityBtnRouterRouter(PrivateGroup)
 		systemRouter.InitSysExportTemplateRouter(PrivateGroup)
 		exampleRouter.InitCustomerRouter(PrivateGroup)
-		exampleRouter.InitFileUploadAndDownloadRouter(PrivateGroup)
+		exampleRouter.InitFileUploadAndDownloadRouter(PrivateGroup, PublicGroup)
 
 	}
 	{
