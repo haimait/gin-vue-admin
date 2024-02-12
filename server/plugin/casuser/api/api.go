@@ -47,18 +47,32 @@ func (p *CasUserApi) Register(c *gin.Context) {
 	}
 }
 
-// @Tags CasUser
-// @Summary 用户登录
-// @Produce  application/json
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"登录成功"}"
-// @Router /CasUser/Login [post]
+// Login
+// @Tags     CasUser
+// @Summary  前端用户登录
+// @Produce   application/json
+// @Param    data  body      systemReq.Login                                             true  "用户名, 密码, 验证码"
+// @Success  200   {object}  response.Response{data=systemRes.LoginResponse,msg=string}  "返回包括用户信息,token,过期时间"
+// @Router   /CasUser/Login [post]
 func (p *CasUserApi) Login(c *gin.Context) {
+	var l casuserRequest.LoginCasUser
 
-	if err := service.ServiceGroupApp.LoginService(); err != nil {
-		global.GVA_LOG.Error("失败!", zap.Error(err))
-		response.FailWithMessage("失败", c)
-	} else {
+	err := c.ShouldBindJSON(&l)
 
-		response.Ok(c)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
 	}
+	err = utils.Verify(l, utils.LoginVerify)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	if err := service.ServiceGroupApp.LoginService(&l, c); err != nil {
+		global.GVA_LOG.Error("失败!", zap.Error(err))
+		//response.FailWithMessage(err.Error(), c)
+		return
+	}
+	return
+	response.Ok(c)
 }

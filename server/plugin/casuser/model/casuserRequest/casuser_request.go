@@ -1,10 +1,18 @@
 package casuserRequest
 
 type RegisterCasUser struct {
-	Username   string `json:"username"`
-	Phone      string `json:"phone"`
-	Password   string `json:"password"`
+	BaseCasUser
 	RePassword string `json:"rePassword"`
-	Captcha    string `json:"captcha"`
-	CaptchaId  string `json:"captchaId"`
+}
+
+type LoginCasUser struct {
+	BaseCasUser
+}
+
+type BaseCasUser struct {
+	Username  string `json:"username"`
+	Phone     string `json:"phone"`
+	Password  string `json:"password"`
+	Captcha   string `json:"captcha"`
+	CaptchaId string `json:"captchaId"`
 }
