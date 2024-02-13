@@ -68,29 +68,36 @@ func (articleService *ArticleService) GetArticleInfoList(info hmArticleReq.Artic
 	if info.Phone != "" {
 		db = db.Where("phone = ?", info.Phone)
 	}
-	if info.IsLink != nil {
+	if info.IsLink != 0 {
 		db = db.Where("is_link = ?", info.IsLink)
 	}
 	if info.Type != "" {
 		db = db.Where("type = ?", info.Type)
 	}
-	if info.Status != nil {
+	if info.Status != 0 {
 		db = db.Where("status = ?", info.Status)
 	}
-	if info.Publish != nil {
+	if info.Publish != 0 {
 		db = db.Where("publish = ?", info.Publish)
 	}
-	if info.Awards != nil {
+	if info.IsAwards != 0 {
+		if info.IsAwards == 1 {
+			db = db.Where("awards != ?", 5) //中奖
+		} else {
+			db = db.Where("awards = ?", 5) //未中奖
+		}
+	}
+	if info.Awards != 0 {
 		db = db.Where("awards = ?", info.Awards)
 	}
-	if info.Top != nil {
+	if info.Top != 0 {
 		db = db.Where("top = ?", info.Top)
 	}
-	if info.AuditorId != nil {
+	if info.AuditorId != 0 {
 		db = db.Where("auditor_id = ?", info.AuditorId)
 	}
-	if info.Category_id != nil {
-		db = db.Where("category_id = ?", info.Category_id)
+	if info.CategoryId != 0 {
+		db = db.Where("category_id = ?", info.CategoryId)
 	}
 	err = db.Count(&total).Error
 	if err != nil {
