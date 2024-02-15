@@ -17,6 +17,8 @@ var (
 	OldAuthorityVerify     = Rules{"OldAuthorityId": {NotEmpty()}}
 	ChangePasswordVerify   = Rules{"Password": {NotEmpty()}, "NewPassword": {NotEmpty()}}
 	SetUserAuthorityVerify = Rules{"AuthorityId": {NotEmpty()}}
+
+	ArticleVoteVerify = Rules{"categoryId": {NotEmpty()}, "IDs": {NotEmpty()}}
 )
 
 var mobileRegex = `^1[3456789]\d{9}$` // [3456789] 表示第二个字符为3、4、5、6、7、8、9中的一个； \d{9} 表示接下来的9个字符均为数字

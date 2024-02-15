@@ -27,9 +27,9 @@ func (e *FileUploadAndDownloadService) Upload(file example.ExaFileUploadAndDownl
 //@param: id uint
 //@return: model.ExaFileUploadAndDownload, error
 
-func (e *FileUploadAndDownloadService) FindFile(id uint) (example.ExaFileUploadAndDownload, error) {
+func (e *FileUploadAndDownloadService) FindFile(f example.ExaFileUploadAndDownload) (example.ExaFileUploadAndDownload, error) {
 	var file example.ExaFileUploadAndDownload
-	err := global.GVA_DB.Where("id = ?", id).First(&file).Error
+	err := global.GVA_DB.Where("id = ?", f.ID).Or("url = ?", f.Url).Or("`key` = ?", f.Key).First(&file).Error
 	return file, err
 }
 
@@ -41,7 +41,7 @@ func (e *FileUploadAndDownloadService) FindFile(id uint) (example.ExaFileUploadA
 
 func (e *FileUploadAndDownloadService) DeleteFile(file example.ExaFileUploadAndDownload) (err error) {
 	var fileFromDb example.ExaFileUploadAndDownload
-	fileFromDb, err = e.FindFile(file.ID)
+	fileFromDb, err = e.FindFile(file)
 	if err != nil {
 		return
 	}

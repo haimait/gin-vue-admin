@@ -70,7 +70,7 @@ func (p *CasUserApi) Login(c *gin.Context) {
 	}
 	if err := service.ServiceGroupApp.LoginService(&l, c); err != nil {
 		global.GVA_LOG.Error("失败!", zap.Error(err))
-		//response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage(err.Error(), c)
 		return
 	}
 	return

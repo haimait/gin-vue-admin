@@ -9,10 +9,10 @@ type FileUploadAndDownloadRouter struct{}
 
 func (e *FileUploadAndDownloadRouter) InitFileUploadAndDownloadRouter(PrivateGroup *gin.RouterGroup, PublicGroup *gin.RouterGroup) {
 	fileUploadAndDownloadRouter := PrivateGroup.Group("fileUploadAndDownload")
-	publicGroupRouter := PublicGroup.Group("viewFileUploadAndDownload")
+	//publicGroupRouter := PublicGroup.Group("viewFileUploadAndDownload")
 	exaFileUploadAndDownloadApi := v1.ApiGroupApp.ExampleApiGroup.FileUploadAndDownloadApi
 	{
-		publicGroupRouter.POST("upload", exaFileUploadAndDownloadApi.UploadFile)                                           // 上传文件
+		//publicGroupRouter.POST("upload", exaFileUploadAndDownloadApi.UploadFile)                                           // 上传文件
 		fileUploadAndDownloadRouter.POST("upload", exaFileUploadAndDownloadApi.UploadFile)                                 // 上传文件
 		fileUploadAndDownloadRouter.POST("getFileList", exaFileUploadAndDownloadApi.GetFileList)                           // 获取上传文件列表
 		fileUploadAndDownloadRouter.POST("deleteFile", exaFileUploadAndDownloadApi.DeleteFile)                             // 删除指定文件

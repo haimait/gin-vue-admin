@@ -13,7 +13,9 @@ type ArticleRouter struct {
 func (s *ArticleRouter) InitArticleRouter(PrivateGroup *gin.RouterGroup, PublicGroup *gin.RouterGroup) {
 	articleRouter := PrivateGroup.Group("article").Use(middleware.OperationRecord())
 	articleRouterWithoutRecord := PublicGroup.Group("article")
-	articleRouterWithoutView := PublicGroup.Group("viewArticle")
+
+	articleRouterView := PrivateGroup.Group("viewArticle").Use(middleware.OperationRecord())
+	//articleRouterView := PublicGroup.Group("viewArticle").Use(middleware.OperationRecord())
 	var articleApi = v1.ApiGroupApp.ArticleApiGroup.ArticleApi
 	{
 		articleRouter.POST("createArticle", articleApi.CreateArticle)             // 新建article表
@@ -22,8 +24,9 @@ func (s *ArticleRouter) InitArticleRouter(PrivateGroup *gin.RouterGroup, PublicG
 		articleRouter.PUT("updateArticle", articleApi.UpdateArticle)              // 更新article表
 	}
 	{
-		articleRouterWithoutView.POST("createArticle", articleApi.CreateArticle)    // 新建article表
-		articleRouterWithoutView.PUT("updateArticle", articleApi.UpdateArticle)     // 更新article表
+		articleRouterView.POST("createArticle", articleApi.CreateArticle)           // 新建article表
+		articleRouterView.PUT("updateArticle", articleApi.UpdateArticle)            // 更新article表
+		articleRouterView.PUT("vote", articleApi.ArticleVote)                       // 更新article表
 		articleRouterWithoutRecord.GET("findArticle", articleApi.FindArticle)       // 根据ID获取article表
 		articleRouterWithoutRecord.GET("getArticleList", articleApi.GetArticleList) // 获取article表列表
 	}

@@ -17,12 +17,18 @@ type ArticleSearch struct {
 	Type       string `json:"type" form:"type"`
 	Status     int    `json:"status" form:"status" `
 	Publish    int    `json:"publish" form:"publish" `
-	IsAwards   int    `json:"isAwards" form:"isAwards" ` //是否获奖 1.是 2.否
 	Awards     int    `json:"awards" form:"awards" `
 	Top        int    `json:"top" form:"top" `
 	AuditorId  int    `json:"auditorId" form:"auditorId" `
 	CategoryId int    `json:"categoryId" form:"categoryId" `
+	CreatedBy  int    `json:"createdBy" form:"createdBy" `
+	UpdatedBy  int    `json:"updatedBy" form:"updatedBy" `
 	request.PageInfo
 	Sort  string `json:"sort" form:"sort"`
 	Order string `json:"order" form:"order"`
+}
+
+type ArticleVoteParams struct {
+	CategoryId int   `json:"categoryId" form:"categoryId" ` // 分类id
+	IDs        []int `json:"IDs" form:"IDs"`                //文章id
 }

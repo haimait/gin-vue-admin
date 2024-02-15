@@ -35,9 +35,9 @@ func Routers() *gin.Engine {
 	if global.GVA_CONFIG.System.Env == "public" {
 		gin.SetMode(gin.ReleaseMode)
 	}
-
 	Router := gin.New()
 	Router.Use(gin.Recovery())
+	Router.Use(middleware.CorsByRules())
 	if global.GVA_CONFIG.System.Env != "public" {
 		Router.Use(gin.Logger())
 	}

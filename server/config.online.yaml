@@ -73,6 +73,14 @@ captcha:
   img-height: 80
   open-captcha: 0 # 0代表一直开启，大于0代表限制次数
   open-captcha-timeout: 3600 # open-captcha大于0时才生效
+  open-verify: true #前端用户是否验证验证码
+
+# article configuration
+article:
+  max-vote-count: 10 # 每人每类每天最大投票次数
+  submission-time: "2024-03-01 00:00:00,2024-03-28 23:59:59" #投稿时间段
+  vote-time: "2024-04-15 00:00:00,2024-04-21 23:59:59" # 投票时间段
+  open-verify: true #开启验证 以上三项目验证
 
 # mysql connect configuration
 # 未初始化之前请勿手动修改数据库信息！！！如果一定要手动初始化请看（https://gin-vue-admin.com/docs/first_master）
