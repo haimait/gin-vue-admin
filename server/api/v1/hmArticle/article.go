@@ -99,6 +99,14 @@ func (articleApi *ArticleApi) UpdateArticle(c *gin.Context) {
 		response.FailWithMessage(err.Error(), c)
 		return
 	}
+	if article.ID == 0 || len(article.Type) == 0 {
+		response.FailWithMessage("ID或者type类型不能为空", c)
+		return
+	}
+	if err := utils.Verify(article, utils.ArticleUpdateVerify); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
 	requestURI := c.Request.RequestURI
 	userId := utils.GetUserID(c)
 	article.UpdatedBy = userId

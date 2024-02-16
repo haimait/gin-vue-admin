@@ -18,7 +18,16 @@ var (
 	ChangePasswordVerify   = Rules{"Password": {NotEmpty()}, "NewPassword": {NotEmpty()}}
 	SetUserAuthorityVerify = Rules{"AuthorityId": {NotEmpty()}}
 
-	ArticleVoteVerify = Rules{"categoryId": {NotEmpty()}, "IDs": {NotEmpty()}}
+	ArticleVoteVerify   = Rules{"CategoryId": {NotEmpty()}, "IDs": {NotEmpty()}}
+	ArticleUpdateVerify = Rules{
+		"Title":       {NotEmpty()},
+		"Description": {NotEmpty()},
+		"Company":     {NotEmpty()},
+		"Phone":       {NotEmpty()},
+		"Author":      {NotEmpty()},
+		"CategoryID":  {NotEmpty()},
+		"Content":     {NotEmpty()},
+	}
 )
 
 var mobileRegex = `^1[3456789]\d{9}$` // [3456789] 表示第二个字符为3、4、5、6、7、8、9中的一个； \d{9} 表示接下来的9个字符均为数字

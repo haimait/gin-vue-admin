@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  gvaServer-api:
+    container_name: gvaServer
+    image: gvaserver:main-V1.0.1
+    privileged: true
+    restart: always
+    ports:
+      - 8888:8888
+    volumes:
+      - ./gvaServer:/app/gvaServer
+      - ./config.online.yaml/:/app/config.online.yaml
+      - ./resource/:/app/resource/
+      - ./uploads/:/app/uploads/
+      - ./log/:/app/log/
+#   network_mode: host
+    networks:
+      - myweb
+networks:
+  myweb:
+    driver: bridge

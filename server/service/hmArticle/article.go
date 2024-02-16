@@ -5,8 +5,10 @@ import (
 	"errors"
 	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
+	modelExample "github.com/flipped-aurora/gin-vue-admin/server/model/example"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/hmArticle"
 	hmArticleReq "github.com/flipped-aurora/gin-vue-admin/server/model/hmArticle/request"
+	"github.com/flipped-aurora/gin-vue-admin/server/service/example"
 	"github.com/flipped-aurora/gin-vue-admin/server/utils"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -70,8 +72,33 @@ func (articleService *ArticleService) DeleteArticleByIds(IDs []string) (err erro
 // UpdateArticle 更新article表记录
 // Author [piexlmax](https://github.com/piexlmax)
 func (articleService *ArticleService) UpdateArticle(requestURI string, article hmArticle.Article) (err error) {
+
+	var articleOld hmArticle.Article
+	global.GVA_DB.Model(&articleOld).Where("id = ?", article.ID).First(&articleOld)
+	if articleOld.ID == 0 {
+		return errors.New("记录不存在")
+	}
+	//var f *example.FileUploadAndDownloadService.DeleteFile
+	var f *example.FileUploadAndDownloadService
+
+	if articleOld.Thumb != article.Thumb {
+		//  删除文件
+		var fileParams modelExample.ExaFileUploadAndDownload
+		fileParams.Url = articleOld.Thumb
+		_ = f.DeleteFile(fileParams)
+	}
 	// 前端修改 && 开启时间验证
+	if articleOld.Content != article.Content && requestURI == "/viewArticle/updateArticle" {
+		//  删除文件
+		var fileParams modelExample.ExaFileUploadAndDownload
+		fileParams.Url = articleOld.Content
+		err2 := f.DeleteFile(fileParams)
+		if err2 != nil {
+			fmt.Println("err2:", err2)
+		}
+	}
 	if requestURI == "/viewArticle/updateArticle" && global.GVA_CONFIG.Article.OpenVerify {
+
 		// 验证可投稿时间
 		err = articleService.verifyTime(global.GVA_CONFIG.Article.SubmissionTime)
 		if err != nil {
@@ -226,6 +253,8 @@ func (articleService *ArticleService) GetArticleInfoList(info hmArticleReq.Artic
 			OrderStr = OrderStr + " desc"
 		}
 		db = db.Order(OrderStr)
+	} else {
+		db = db.Order("id desc")
 	}
 
 	if limit != 0 {
