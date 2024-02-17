@@ -10,4 +10,4 @@ COPY ./config.docker.yaml ./
 COPY  ./resource ./resource/
 
 EXPOSE 8888
-ENTRYPOINT ./gvaServer -c config.online.yaml
+ENTRYPOINT ./gvaServer -c config.docker.yaml

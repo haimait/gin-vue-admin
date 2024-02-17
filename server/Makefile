@@ -5,7 +5,7 @@ check:
 
 build:
 	@docker build -t gvaserver:main-V1.0.1 .
-	@echo "gvaadmin image build successful"
+	@echo "gvaserver image build successful"
 
 run:
 #	@if [ $(shell docker ps -aq --filter name=gvaadmin --filter publish=8081) ]; then docker rm -f gvaadmin; fi

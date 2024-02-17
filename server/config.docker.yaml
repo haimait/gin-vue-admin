@@ -20,8 +20,8 @@ zap:
 # redis configuration
 redis:
   db: 0
-  addr: 177.7.0.14:6379
-  password: ""
+  addr: myredis:6379 # 这里写容器内的端口
+  password: "G62m50oigInC30sf"
 
 # mongo configuration
 mongo:
@@ -55,7 +55,7 @@ system:
   addr: 8888
   db-type: mysql
   oss-type: local    # 控制oss选择走本地还是 七牛等其他仓 自行增加其他oss仓可以在 server/utils/upload/upload.go 中 NewOss函数配置
-  use-redis: false     # 使用redis
+  use-redis: true     # 使用redis
   use-mongo: false     # 使用mongo
   use-multipoint: false
   # IP限制次数 一个小时15000次
@@ -77,20 +77,23 @@ article:
   max-vote-count: 10 # 每人每类每天最大投票次数
   submission-time: "2024-03-01 00:00:00,2024-03-28 23:59:59" #投稿时间段
   vote-time: "2024-04-15 00:00:00,2024-04-21 23:59:59" # 投票时间段
-  open-verify: false #开启验证 以上三项目验证
+  open-verify: true #开启验证 以上三项目验证
 
 # mysql connect configuration
 # 未初始化之前请勿手动修改数据库信息！！！如果一定要手动初始化请看（https://gin-vue-admin.com/docs/first_master）
 mysql:
-  path: ""
-  port: ""
-  config: ""
-  db-name: ""
-  username: ""
-  password: ""
+  prefix: ""
+  port: "3306" # 这里写容器内的端口
+  config: charset=utf8mb4&parseTime=True&loc=Local
+  db-name: gva
+  username: root
+  password: "PXDN93VRKUm8TeE7"
+  path: mysql
+  engine: ""
+  log-mode: info
   max-idle-conns: 10
   max-open-conns: 100
-  log-mode: ""
+  singular: false
   log-zap: false
 
 # pgsql connect configuration
@@ -214,7 +217,7 @@ Timer:
 # 跨域配置
 # 需要配合 server/initialize/router.go -> `Router.Use(middleware.CorsByRules())` 使用
 cors:
-  mode: whitelist # 放行模式: allow-all, 放行全部; whitelist, 白名单模式, 来自白名单内域名的请求添加 cors 头; strict-whitelist 严格白名单模式, 白名单外的请求一律拒绝
+  mode: allow-all # 放行模式: allow-all, 放行全部; whitelist, 白名单模式, 来自白名单内域名的请求添加 cors 头; strict-whitelist 严格白名单模式, 白名单外的请求一律拒绝
   whitelist:
     - allow-origin: example1.com
       allow-headers: content-type

@@ -62,7 +62,5 @@ services:
 networks:
   gva_net:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.16.0.0/16
+    external: true
 

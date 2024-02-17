@@ -9,13 +9,14 @@ services:
       - 8888:8888
     volumes:
       - ./gvaServer:/app/gvaServer
-      - ./config.online.yaml/:/app/config.online.yaml
+      - ./config.docker.yaml/:/app/config.docker.yaml
       - ./resource/:/app/resource/
       - ./uploads/:/app/uploads/
       - ./log/:/app/log/
 #   network_mode: host
     networks:
-      - myweb
+      - gva_net
 networks:
-  myweb:
+  gva_net:
     driver: bridge
+    external: true
