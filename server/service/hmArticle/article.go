@@ -238,7 +238,7 @@ func (articleService *ArticleService) GetArticleInfoList(info hmArticleReq.Artic
 		db = db.Where("created_by = ?", info.CreatedBy)
 	}
 	if info.UpdatedBy != 0 {
-		db = db.Where("updated_by = ?", info.CreatedBy)
+		db = db.Where("updated_by = ?", info.UpdatedBy)
 	}
 	err = db.Count(&total).Error
 	if err != nil {
