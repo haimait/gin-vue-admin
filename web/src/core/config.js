@@ -3,7 +3,7 @@
  */
 
 const config = {
-  appName: 'Gin-Vue-Admin',
+  appName: '全民国家安全教育',
   appLogo: 'https://www.gin-vue-admin.com/img/logo.png',
   showViteLogo: true,
   logs: [],
