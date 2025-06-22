@@ -173,6 +173,17 @@ export const eye = (data) => {
 }
 
 
+export const createWeb = (data) => {
+  return service({
+    url: '/autoCode/llmAuto',
+    method: 'post',
+    data: { ...data, mode: 'painter' },
+    timeout: 1000 * 60 * 10
+  })
+}
+
+
+
 export const addFunc = (data) => {
   return service({
     url: '/autoCode/addFunc',
@@ -192,6 +203,32 @@ export const initMenu = (data) => {
 export const initAPI = (data) => {
   return service({
     url: '/autoCode/initAPI',
+    method: 'post',
+    data
+  })
+}
+
+export const mcp = (data) => {
+  return service({
+    url: '/autoCode/mcp',
+    method: 'post',
+    data
+  })
+}
+
+
+export const mcpList = (data) => {
+  return service({
+    url: '/autoCode/mcpList',
+    method: 'post',
+    data
+  })
+}
+
+
+export const mcpTest = (data) => {
+  return service({
+    url: '/autoCode/mcpTest',
     method: 'post',
     data
   })

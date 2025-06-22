@@ -206,7 +206,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="TableName" class="w-full">
+            <el-form-item label="abbreviation" prop="abbreviation" class="w-full">
               <template #label>
                 <el-tooltip
                   content="简称会作为入参对象名和路由group"
@@ -268,7 +268,7 @@
               prop="package"
               class="w-full relative"
             >
-              <el-select v-model="form.package" class="w-full pr-12">
+              <el-select v-model="form.package" class="w-full pr-12" filterable>
                 <el-option
                   v-for="item in pkgs"
                   :key="item.ID"
@@ -307,6 +307,7 @@
               </template>
               <el-select
                 v-model="form.businessDB"
+                clearable
                 placeholder="选择业务库"
                 class="w-full"
               >
@@ -534,7 +535,7 @@
             width="160"
           >
             <template #default="{ row }">
-              <el-input :disabled="row.disabled" v-model="row.fieldName" />
+              <el-input disabled v-model="row.fieldName" />
             </template>
           </el-table-column>
           <el-table-column
@@ -657,7 +658,7 @@
           <el-table-column
             align="left"
             prop="dataTypeLong"
-            label="数据库字段长度"
+            label="字段长度/枚举值"
             width="160"
           >
             <template #default="{ row }">
@@ -741,6 +742,7 @@
           class="flex items-center"
           :before-upload="importJson"
           :show-file-list="false"
+          :headers="{'x-token': token}"
           accept=".json"
         >
           <el-button type="primary" class="mx-2" :disabled="isAdd"
@@ -828,6 +830,11 @@
   import { ElMessage, ElMessageBox } from 'element-plus'
   import WarningBar from '@/components/warningBar/warningBar.vue'
   import Sortable from 'sortablejs'
+  import { useUserStore } from "@/pinia";
+
+  const userStore = useUserStore()
+
+  const token = userStore.token
 
   const handleFocus = () => {
     document.addEventListener('keydown', handleKeydown);
@@ -931,7 +938,6 @@
     if (res.code === 0) {
       form.value.fields = []
       const json = JSON.parse(res.data)
-
       json.fields?.forEach((item) => {
         item.fieldName = toUpperCase(item.fieldName)
       })
@@ -1561,6 +1567,7 @@
 
   const catchData = () => {
     window.sessionStorage.setItem('autoCode', JSON.stringify(form.value))
+    ElMessage.success('暂存成功')
   }
 
   const getCatch = () => {
@@ -1614,6 +1621,8 @@
     reader.onload = (e) => {
       try {
         form.value = JSON.parse(e.target.result)
+        form.value.generateServer = true
+        form.value.generateWeb = true
         ElMessage.success('JSON 文件导入成功')
       } catch (_) {
         ElMessage.error('无效的 JSON 文件')
